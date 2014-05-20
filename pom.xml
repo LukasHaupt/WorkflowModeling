@@ -21,13 +21,12 @@
 		<version>2.13.0</version>
 	</parent>
 
-	<artifactId>camel-example-jms-file</artifactId>
+	<artifactId>camel-mail</artifactId>
 	<packaging>jar</packaging>
-	<name>Camel :: Example :: JMS-File</name>
-	<description>An example that persists messages from JMS to files</description>
+	<name>Camel :: Mail</name>
+	<description>Example to send Mail</description>
 
 	<dependencies>
-
 		<!-- Camel dependencies -->
 		<dependency>
 			<groupId>org.apache.camel</groupId>
@@ -37,59 +36,24 @@
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-jms</artifactId>
 		</dependency>
-
-		<!-- ActiveMQ dependencies -->
 		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-broker</artifactId>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-mail</artifactId>
+			<version>2.13.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-camel</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.xbean</groupId>
-			<artifactId>xbean-spring</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
 	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>Example</id>
+			<properties>
+				<target.main.class>main.java.group1.foodsupply.FoodSupply</target.main.class>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
-
 		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-artifacts</id>
-						<phase>package</phase>
-						<goals>
-							<goal>attach-artifact</goal>
-						</goals>
-						<configuration>
-							<artifacts>
-								<artifact>
-									<file>target/classes/features.xml</file>
-									<type>xml</type>
-									<classifier>features</classifier>
-								</artifact>
-							</artifacts>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
 			<!-- Allows the example to be run via 'mvn compile exec:java' -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -97,12 +61,8 @@
 				<configuration>
 					<mainClass>${target.main.class}</mainClass>
 					<includePluginDependencies>false</includePluginDependencies>
-					<commandlineArgs>${target.cmd.args}</commandlineArgs>
 				</configuration>
 			</plugin>
 		</plugins>
-
 	</build>
-
-
 </project>
